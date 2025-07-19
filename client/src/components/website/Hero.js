@@ -5,14 +5,14 @@ const slides = [
   {
     title: "We Care Your Child’s Growth",
     heading: "The Best Place For Your Kid’s Bright Future",
-    bg: "/assets/hero-bg1.jpg", // <-- yahan sahi path
+    bg: "/assets/banner/hero-bg1.jpg", // <-- yahan sahi path
     btn1: { text: "Get Started", link: "/admission" },
     btn2: { text: "Learn More", link: "/about" },
   },
   {
     title: "To achieve success, one must have positive thinking",
     heading: "Gyan Dayini Classes: Personal Focus, Secure Results",
-    bg: "/assets/hero-bg2.jpg", // <-- yahan sahi path
+    bg: "/assets/banner/hero-bg2.jpg", // <-- yahan sahi path
     btn1: { text: "Enroll Now", link: "/admission" },
     btn2: { text: "Contact Us", link: "/contact" },
   }

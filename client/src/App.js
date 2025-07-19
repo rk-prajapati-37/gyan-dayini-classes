@@ -1,6 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
+
 import TopHeader from "./components/common/TopHeader";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
