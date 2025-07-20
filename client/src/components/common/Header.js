@@ -1,151 +1,220 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-// Direct import from public is not needed in React, use src="/logo.png"
+
+
+import "./Header.css";
+
+const navLinks = [
+  { title: "Home", path: "/" },
+  {
+    title: "About",
+    path: "/about",
+    submenu: [
+      { title: "Our Team", path: "/team" },
+      { title: "Testimonial", path: "/testimonial" }
+    ]
+  },
+  { title: "Services", path: "/services" },
+  { title: "Programs", path: "/programs" },
+  { title: "Events", path: "/events" },
+  { title: "Blogs", path: "/blogs" },
+  { title: "Contact", path: "/contact" }
+];
+
 export default function Header() {
-  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [dropdown, setDropdown] = useState("");
+  const [mobileDropdown, setMobileDropdown] = useState("");
 
   return (
-    <header style={{
-      background: "#aa2326",
-      padding: 0,
-      borderBottom: "2px solid #fae6ee",
-      boxShadow: "0 2px 8px #00000019"
-    }}>
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        maxWidth: 1300,
-        margin: "0 auto",
-        padding: "0 18px",
-        height: 100
-      }}>
-        {/* Logo and Name */}
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <img
-            src="./logo.png"
-            alt="Gyan Dayini Classes"
-            style={{
-              height: 75, width: 75,
-              borderRadius: 12,
-              border: "2px solid #fff",
-              background: "#fff"
-            }}
-          />
-          <div>
-            {/* <span style={{
-              fontWeight: 700, fontSize: 28,
-              color: "#fa4b89", letterSpacing: ".5px"
-            }}>Baby</span>
-            <span style={{
-              fontWeight: 700, fontSize: 28, color: "#4763fa"
-            }}>Care</span>
-            <span style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginLeft: 12 }}>
-              / Gyan Dayini Classes
-            </span> */}
-          </div>
-        </div>
-        {/* Navigation */}
-        <nav>
-          <ul style={{
-            display: "flex",
-            gap: 26,
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-            fontWeight: 500
-          }}>
-            <li><Link to="/" style={navStyle}>Home</Link></li>
-            <li><Link to="/about" style={navStyle}>About</Link></li>
-            <li><Link to="/services" style={navStyle}>Services</Link></li>
-            <li><Link to="/gallery" style={navStyle}>Gallery</Link></li>
-            <li><Link to="/contact" style={navStyle}>Contact</Link></li>
+    <header className="main-header">
+      <div className="header-inner">
+       <div className="header-logo-group">
+  <img
+    src="/header_logo.png"
+    alt="Gyan Dayini Logo"
+    className="header-logo"
+  />
+<div className="header-brand">
+  <span className=" brand-red">Gyan Dayini</span>
+  <span className=" brand-blue"> Classes</span>
+</div>
+
+</div>
+
+        <nav className="header-nav">
+          <ul>
+            {navLinks.map((link) =>
+              link.submenu ? (
+                <li
+                  key={link.title}
+                  className="nav-has-dropdown"
+                  onMouseEnter={() => setDropdown(link.title)}
+                  onMouseLeave={() => setDropdown("")}
+                >
+                  <button
+                    type="button"
+                    className="nav-link-btn"
+                    aria-haspopup="true"
+                    aria-expanded={dropdown === link.title}
+                  >
+                    {link.title} <i className={`fas fa-chevron-down${dropdown === link.title ? " active" : ""}`} />
+                  </button>
+                  <div
+                    className="nav-dropdown"
+                    style={{ display: dropdown === link.title ? "block" : "none" }}
+                  >
+                    {link.submenu.map((sublink) => (
+                      <Link key={sublink.title} to={sublink.path}>
+                        {sublink.title}
+                      </Link>
+                    ))}
+                  </div>
+                </li>
+              ) : (
+                <li key={link.title}>
+                  <Link to={link.path}>{link.title}</Link>
+                </li>
+              )
+            )}
           </ul>
         </nav>
-        {/* Social Icons + Login */}
-        <div style={{
-          display: "flex", alignItems: "center",
-          gap: 14
-        }}>
-          {/* Have any questions? Box */}
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            // background: "#fff0f6",
-            borderRadius: 18,
-            padding: "6px 18px 6px 10px",
-            marginRight: 16,
-            // border: "1.5px solid #ffd6e6"
-          }}>
-            <span style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "#fff",
-              color: "#aa2326",
-              borderRadius: "50%",
-              width: 32,
-              height: 32,
-              fontSize: 20,
-              marginRight: 10
-            }}>
-              <i className="fas fa-phone-alt"></i>
-            </span>
+        {/* Desktop only, hide on mobile */}
+        <div className="header-rights desktop-only">
+          <div className="header-questions">
+            <span className="header-phone-icon"><i className="fas fa-phone-alt"></i></span>
             <div>
-              <div style={{ color: "#FFF", fontWeight: 500, fontSize: 15 }}>Have any questions?</div>
-              <div style={{ color: "#fff", fontWeight: 600, fontSize: 17 }}>
-                Free: + 0123 456 7890
-              </div>
+              <div className="header-ques-text">Have any questions?</div>
+              <div className="header-ques-phone">Free: + 0123 456 7890</div>
             </div>
           </div>
-          {/* Social Icons */}
-          {/* <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer"
-            style={{ color: "#fff", fontSize: 22 }} title="Facebook">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"
-            style={{ color: "#fff", fontSize: 22 }} title="Twitter">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"
-            style={{ color: "#fff", fontSize: 22 }} title="Instagram">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"
-            style={{ color: "#fff", fontSize: 22 }} title="LinkedIn">
-            <i className="fab fa-linkedin-in"></i>
-          </a> */}
-          <button
-            style={{
-              background: "#fff",
-              color: "#aa2326",
-              border: 'none',
-              borderRadius: 999,
-              padding: "8px 22px",
-              fontWeight: 700,
-              fontSize: 16,
-              marginLeft: 10,
-              boxShadow: "0 1.5px 8px #fa4b8920",
-              cursor: "pointer",
-              transition: "background .2s"
-            }}
-            onClick={() => navigate("/login")}
-          >
+          <button className="header-login-btn" onClick={() => setModalOpen(true)}>
             Login
           </button>
         </div>
+        {/* Burger - mobile only */}
+        <button className="header-burger mobile-only" aria-label="Open menu" onClick={() => setMenuOpen((m) => !m)}>
+          <span /><span /><span />
+        </button>
       </div>
+
+      {/* Mobile Drawer */}
+      {menuOpen && (
+        <>
+          <div className="mobile-menu-overlay" onClick={() => setMenuOpen(false)} />
+          <nav className="mobile-menu-drawer">
+            <div className="mobile-menu-header">
+            <div className="header-logo-group">
+  <img
+    src="/header_logo.png"
+    alt="Gyan Dayini Logo"
+    className="header-logo"
+  />
+  <span className="header-brand">Gyan Dayini Classes</span>
+</div>
+
+
+              <button className="menu-close-btn" onClick={() => setMenuOpen(false)}>
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            <ul className="mobile-nav-links">
+              {navLinks.map((link) =>
+                link.submenu ? (
+                  <li key={link.title}>
+                    <button
+                      className="mobile-nav-link-btn"
+                      onClick={() =>
+                        setMobileDropdown(
+                          mobileDropdown === link.title ? "" : link.title
+                        )
+                      }
+                    >
+                      {link.title} <i className={`fas fa-chevron-${mobileDropdown === link.title ? "up" : "down"}`} />
+                    </button>
+                    <div
+                      className="mobile-nav-dropdown"
+                      style={{ display: mobileDropdown === link.title ? "block" : "none" }}
+                    >
+                      {link.submenu.map((sublink) => (
+                        <Link
+                          key={sublink.title}
+                          to={sublink.path}
+                          onClick={() => setMenuOpen(false)}
+                        >{sublink.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </li>
+                ) : (
+                  <li key={link.title}>
+                    <Link to={link.path} onClick={() => setMenuOpen(false)}>
+                      {link.title}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+            {/* Only show in drawer (mobile-only) */}
+            <div className="mobile-header-questions">
+              <span className="header-phone-icon"><i className="fas fa-phone-alt"></i></span>
+              <div>
+                <div className="mobile-ques-text">Have any questions?</div>
+                <div className="mobile-ques-phone">Free: + 0123 456 7890</div>
+              </div>
+            </div>
+            <button className="mobile-login-btn" onClick={() => { setModalOpen(true); setMenuOpen(false); }}>
+              Login
+            </button>
+          </nav>
+        </>
+      )}
+
+      {/* Login Modal */}
+      {modalOpen && (
+        <div className="login-modal-overlay" onClick={() => setModalOpen(false)}>
+          <div className="login-modal" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setModalOpen(false)}>
+              <i className="fas fa-times"></i>
+            </button>
+            <LoginSignupTabs />
+          </div>
+        </div>
+      )}
     </header>
   );
 }
 
-const navStyle = {
-  color: "#fff",
-  textDecoration: "none",
-  background: "none",
-  padding: "7px 12px",
-  borderRadius: "18px",
-  transition: "background .2s",
-  fontSize: 16,
-};
+// Same as before for the modal.
+function LoginSignupTabs() {
+  const [tab, setTab] = useState("login");
+  return (
+    <div style={{ minWidth: 310, maxWidth: 340 }}>
+      <div className="modal-tabs">
+        <button className={tab === "login" ? "active" : ""} onClick={() => setTab("login")}>Login</button>
+        <button className={tab === "signup" ? "active" : ""} onClick={() => setTab("signup")}>Sign Up</button>
+      </div>
+      {tab === "login" ? (
+        <form className="login-form">
+          <label>Email</label>
+          <input type="email" placeholder="Enter email" />
+          <label>Password</label>
+          <input type="password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+      ) : (
+        <form className="login-form">
+          <label>Name</label>
+          <input type="text" placeholder="Your Name" />
+          <label>Email</label>
+          <input type="email" placeholder="Enter email" />
+          <label>Password</label>
+          <input type="password" placeholder="Create a password" />
+          <button type="submit">Sign Up</button>
+        </form>
+      )}
+    </div>
+  );
+}

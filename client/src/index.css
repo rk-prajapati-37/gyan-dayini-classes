@@ -5,6 +5,23 @@
 
 
 
+brand-red {
+    color: #cc0000;
+}
+brand-gold {
+    color: #ffcc00;
+}
+brand-white {
+    color: #ffffff;
+}
+brand-black {
+    color: #000000;
+}
+
+background-brand {
+    background: #e3e3e3;
+}
+
 .slick-prev, .slick-next{
     z-index: 1;;
 }

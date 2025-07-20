@@ -1,28 +1,16 @@
+// src/components/common/TopHeader.js
 import React from "react";
+import "./TopHeader.css"; // अपने CSS file को import करो
 
-// Font Awesome CDN को public/index.html में जरूर जोड़ें!
 export default function TopHeader() {
   return (
-    <div style={{
-      background: "#ff5a91",
-      color: "#fff",
-      fontSize: 15,
-      padding: "8px 0",
-      borderBottom: "1px solid #fccadb"
-    }}>
-      <div style={{
-        maxWidth: 1300,
-        margin: "0 auto",
-        padding: "0 24px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between"
-      }}>
+    <div className="top-header">
+      <div className="top-header-inner">
         {/* Left: location & email */}
-        <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
-          <span>
+        <div className="top-header-left">
+          <span style={{ borderRight: "1px solid #ccc", paddingRight: 10}}>
             <i className="fas fa-map-marker-alt" style={{ marginRight: 5 }}></i>
-            123 Street, New York {/* अपना पता डालें */}
+            123 Street, New York
           </span>
           <span>
             <i className="fas fa-envelope" style={{ marginRight: 5 }}></i>
@@ -30,21 +18,17 @@ export default function TopHeader() {
           </span>
         </div>
         {/* Right: social icons */}
-        <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-             style={{ color: "#fff", fontSize: 18 }}>
+        <div className="top-header-right">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-facebook-f"></i>
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-             style={{ color: "#fff", fontSize: 18 }}>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-twitter"></i>
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-             style={{ color: "#fff", fontSize: 18 }}>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-instagram"></i>
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-             style={{ color: "#fff", fontSize: 18 }}>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-linkedin-in"></i>
           </a>
         </div>

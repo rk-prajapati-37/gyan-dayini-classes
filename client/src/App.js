@@ -7,7 +7,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 import TopHeader from "./components/common/TopHeader";
-import Header from "./components/common/Header";
+import DesktopHeader from "./components/common/Header"; // (आपका main desktop wala)
+// import MobileHeader from "./components/common/MobileHeader";
+
 import Footer from "./components/common/Footer";
 
 import Home from './pages/Home';
@@ -17,8 +19,9 @@ import Login from './pages/Login';
 function App() {
   return (
     <Router>
-          <TopHeader />
-      <Header />
+      <TopHeader />
+      <DesktopHeader />
+      {/* <MobileHeader /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
